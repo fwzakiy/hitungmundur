@@ -1,46 +1,56 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<title>Countdown</title>
-	</head>
-	<body>
-		<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-			<p style="text-align: center; font-family: sans-serif; font-size: 90px;">
-			<span id="days" style="font-weight: bold; font-size: 700px;"></span><br>
-			hari hingga hari peringatan pernikahan 
-			</p>
-			<p style="text-align: center; font-family: sans-serif; font-size: 70px;">
-			Stata: <span id="bb-stata" style="font-weight: bold; font-size: 80px;"></span> bikes → SidPac: <span id="bb-sidpac" style="font-weight: bold; font-size: 80px;"></span> docks
-			</p>
-		</div>
-		<script>
-function refresh() {
-	var nowtime = new Date();
-	var ftdeadline = new Date(2024, 8, 24, 00, 00);
-	var diff = ftdeadline - nowtime;
-	var days = Math.round(diff / (60 * 60 * 1000 * 24));
-	document.getElementById("days").innerHTML = days.toString();
-	var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var d = JSON.parse(this.responseText)["data"]["stations"];
-			var stata = d.filter(function(obj) {
-				return obj["station_id"] == 80;
-			})[0];
-			var sidpac = d.filter(function(obj) {
-				return obj["station_id"] == 178;
-			})[0];
-			document.getElementById("bb-stata").innerHTML = stata["num_bikes_available"].toString();
-			document.getElementById("bb-sidpac").innerHTML = sidpac["num_docks_available"].toString();
-		}
-	};
-	xmlhttp.open('GET', 'https://gbfs.bluebikes.com/gbfs/en/station_status.json');
-	xmlhttp.send();
-};
-refresh();
-setInterval(refresh, 60 * 1000); // 60 * 1000 milsec
-		</script>
-	</body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hitung Mundur</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+
+    #countdown {
+      font-size: 2em;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Hitung Mundur</h1>
+  <div id="countdown"></div>
+
+  <script>
+    // Tanggal target untuk hitung mundur (ganti sesuai kebutuhan)
+    var targetDate = new Date("Aug 24, 2024 00:00:00").getTime();
+
+    // Update hitung mundur setiap 1 detik
+    var countdown = setInterval(function() {
+      // Tanggal saat ini
+      var currentDate = new Date().getTime();
+
+      // Selisih waktu antara tanggal target dan tanggal saat ini
+      var timeDifference = targetDate - currentDate;
+
+      // Hitung hari, jam, menit, dan detik
+      var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+      // Tampilkan hasil hitung mundur di elemen dengan id "countdown"
+      document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+      // Jika waktu hitung mundur berakhir, hentikan interval
+      if (timeDifference < 0) {
+        clearInterval(countdown);
+        document.getElementById("countdown").innerHTML = "hari hingga hari peringatan pernikahan.";
+      }
+    }, 1000);
+  </script>
+
+</body>
 </html>
