@@ -47,7 +47,7 @@
       var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
       // Tampilkan hasil hitung mundur di elemen dengan id "countdown"
-      document.getElementById("countdown").innerHTML = days + " hari " + hours + " jam " + minutes + " menit " + seconds + " detik ";
+      document.getElementById("countdown").innerHTML = days + " hari, " + hours + " jam, " + minutes + " menit, dan " + seconds + " detik";
 
       // Jika waktu hitung mundur berakhir, hentikan interval
       if (timeDifference < 0) {
