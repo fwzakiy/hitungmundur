@@ -42,15 +42,17 @@
       var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
       // Tampilkan hasil hitung mundur di elemen dengan id "countdown"
-      document.getElementById("countdown").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+      document.getElementById("countdown").innerHTML = days + " hari " + hours + " jam " + minutes + " menit " + seconds + " detik ";
 
       // Jika waktu hitung mundur berakhir, hentikan interval
       if (timeDifference < 0) {
         clearInterval(countdown);
-        document.getElementById("countdown").innerHTML = "hari hingga hari peringatan pernikahan.";
+        document.getElementById("countdown").innerHTML = "Selamat memperingati hari pernikahan!";
       }
     }, 1000);
   </script>
+
+  <p>lagi hingga peringatan hari pernikahan.</p>
 
 </body>
 </html>
