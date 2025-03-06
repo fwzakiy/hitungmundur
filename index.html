@@ -21,6 +21,12 @@
       font-weight: bold;
       color: #333;
     }
+
+    #teks {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -48,7 +54,7 @@
 
       // Tampilkan hasil hitung mundur di elemen dengan id "countdown"
       document.getElementById("countdown").innerHTML = days + " hari, " + hours + " jam, " + minutes + " menit, dan " + seconds + " detik";
-      document.getElementById("countdown").innerHTML = "lagi hingga peringatan hari pernikahan.";
+      document.getElementById("teks").innerHTML = "lagi hingga peringatan hari pernikahan.";
 
       // Jika waktu hitung mundur berakhir, hentikan interval
       if (timeDifference < 0) {
@@ -57,8 +63,6 @@
       }
     }, 1000);
   </script>
-
-//  <p>lagi hingga peringatan hari pernikahan.</p>
-
+  
 </body>
 </html>
